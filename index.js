@@ -18,7 +18,6 @@
         disableElements();
         setProductIds();
         updateQuantities();
-        
         setInterval(function() {
             updateQuantities();
         }, 3000);
@@ -35,9 +34,10 @@
         }
         
         function updateQuantities() {
-            $.get('/controller/product/quantity?' + $.param({
+            var url = '/controller/product/quantity?' + $.param({
                 productIds: productIds
-            }), function(items) {
+            });
+            $.get(url, function(items) {
                 els.forEach(function(el) {
                     var productId = parseInt(el.getAttribute(settings.attr));
                     items.forEach(function(obj) {
@@ -49,7 +49,6 @@
                             }
                         }
                     });
-                    productIds.push(productId);
                 });
             });
         }
