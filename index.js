@@ -13,10 +13,14 @@
         }, options);
         
         var els = document.querySelectorAll('[' + settings.attr + ']');
+        if (els.length === 0) {
+            return;
+        }
+        
         var productIds = [];
         
-        disableElements();
         setProductIds();
+        disableElements();
         updateQuantities();
         setInterval(function() {
             updateQuantities();
@@ -49,6 +53,8 @@
                             }
                         }
                     });
+                    // This was resulting in productIds increasing infinitely.
+                    //productIds.push(productId);
                 });
             });
         }
