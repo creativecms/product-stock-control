@@ -46,15 +46,13 @@
                     var productId = parseInt(el.getAttribute(settings.attr));
                     items.forEach(function(obj) {
                         if (obj.id === productId) {
-                            var msg = obj.quantity ? obj.quantity + ' ' + (obj.quantity === 1 ? settings.singularLabel : settings.pluralLabel) : settings.outOfStockMessage;
+                            var msg = obj.stockQuantity ? obj.stockQuantity + ' ' + (obj.stockQuantity === 1 ? settings.singularLabel : settings.pluralLabel) : settings.outOfStockMessage;
                             $(el).find('[' + settings.quantityAttr + ']').removeClass(settings.quantityHiddenClassName).html(msg);
-                            if (obj.quantity) {
+                            if (obj.stockQuantity) {
                                 $(el).find('[' + settings.disabledAttr + ']').attr('disabled', false);
                             }
                         }
                     });
-                    // This was resulting in productIds increasing infinitely.
-                    //productIds.push(productId);
                 });
             });
         }
