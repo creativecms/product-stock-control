@@ -17,14 +17,25 @@
             return;
         }
         
+        var tableName;
         var productIds = [];
         
+        setTableName();
         setProductIds();
         disableElements();
         updateQuantities();
         setInterval(function() {
             updateQuantities();
         }, 3000);
+        
+        function setTableName() {
+            if (els.length) {
+                tableName = els[0].getAttribute('data-table-name');
+                if (!tableName) {
+                    tableName = 'm_products_products';
+                }
+            }
+        }
         
         function setProductIds() {
             els.forEach(function(el) {
@@ -39,6 +50,7 @@
         
         function updateQuantities() {
             var url = '/controller/product/quantity?' + $.param({
+                tableName: tableName,
                 productIds: productIds
             });
             $.get(url, function(items) {
