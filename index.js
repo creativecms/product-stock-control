@@ -7,6 +7,7 @@
             quantityAttr: 'data-product-stock-control--quantity',
             quantityHiddenClassName: 'hidden',
             disabledAttr: 'data-product-stock-control--disabled',
+            hiddenAttr: 'data-product-stock-control--hidden',
             singularLabel: 'item left',
             pluralLabel: 'items left',
             outOfStockMessage: '<span class="label label-danger">Out of stock</span>'
@@ -46,6 +47,7 @@
         
         function disableElements() {
             $('[' + settings.disabledAttr + ']').attr('disabled', true);
+            $('[' + settings.hiddenAttr + ']').css('display', 'none');
         }
         
         function updateQuantities() {
@@ -62,6 +64,7 @@
                             $(el).find('[' + settings.quantityAttr + ']').removeClass(settings.quantityHiddenClassName).html(msg);
                             if (obj.stockQuantity) {
                                 $(el).find('[' + settings.disabledAttr + ']').attr('disabled', false);
+                                $(el).find('[' + settings.hiddenAttr + ']').css('display', 'inline');
                             }
                         }
                     });
