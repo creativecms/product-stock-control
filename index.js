@@ -72,10 +72,11 @@
                             // The quantity is null when stock tracking is disabled.
                             && obj.stockQuantity !== null
                         ) {
-                            var msg = obj.stockQuantity ? obj.stockQuantity + ' ' + (obj.stockQuantity === 1 ? settings.singularLabel : settings.pluralLabel) : settings.outOfStockMessage;
+                            var inStock = obj.stockQuantity > 0;
+                            var msg = inStock ? obj.stockQuantity + ' ' + (obj.stockQuantity === 1 ? settings.singularLabel : settings.pluralLabel) : settings.outOfStockMessage;
                             $(el).find('[' + settings.quantityAttr + ']').removeClass(settings.quantityHiddenClassName).html(msg);
-                            
-                            if (obj.stockQuantity) {
+    
+                            if (inStock) {
                                 $(el).find('[' + settings.disabledAttr + ']').attr('disabled', false);
                                 $(el).find('[' + settings.hiddenAttr + ']').css('display', 'inline');
                             }
